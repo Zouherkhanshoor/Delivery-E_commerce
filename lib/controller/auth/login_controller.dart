@@ -44,16 +44,26 @@ class LoginControllerImp extends LoginController {
       if (StatusRequest.success == statusRequest) {
         if (response['status'] == "success") {
           // data.addAll(response['data']);
-          myServices.sharedPreferences
-              .setString("id", response["data"]["users_id"].toString());
-          myServices.sharedPreferences
-              .setString("username", response["data"]["users_name"]);
-          myServices.sharedPreferences
-              .setString("email", response["data"]["users_email"]);
-          myServices.sharedPreferences
-              .setString("phone", response["data"]["users_phone"].toString());
-          myServices.sharedPreferences.setString("step", "2");
-          Get.offNamed(AppRoute.homepage);
+          if (response["data"]["delivery_approve"].toString() == "1") {
+            myServices.sharedPreferences
+                .setString("id", response["data"]["delivery_id"].toString());
+
+            myServices.sharedPreferences
+                .setString("username", response["data"]["delivery_name"]);
+            myServices.sharedPreferences
+                .setString("email", response["data"]["delivery_email"]);
+            myServices.sharedPreferences.setString(
+                "phone", response["data"]["delivery_phone"].toString());
+            myServices.sharedPreferences.setString("step", "2");
+            String deliveryid = myServices.sharedPreferences.getString("id")!;
+            FirebaseMessaging.instance.subscribeToTopic("delivery");
+            FirebaseMessaging.instance
+                .subscribeToTopic("delivery${deliveryid}");
+            Get.offNamed(AppRoute.homepage);
+          } else {
+            Get.toNamed(AppRoute.verifyCodeSignUp,
+                arguments: {"email": email.text});
+          }
         } else {
           Get.defaultDialog(
               title: "Warnning", middleText: "Email Or Password Not Correct");
@@ -77,6 +87,7 @@ class LoginControllerImp extends LoginController {
   @override
   void onInit() {
     FirebaseMessaging.instance.getToken().then((value) {
+      print("token=================================");
       print(value);
       String? token = value;
     });

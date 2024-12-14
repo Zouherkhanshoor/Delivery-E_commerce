@@ -1,22 +1,23 @@
 class ItemsModel {
-  int? itemsId;
+  String? itemsId;
   String? itemsName;
   String? itemsNameAr;
   String? itemsDesc;
   String? itemsDescAr;
   String? itemsImage;
-  int? itemsCount;
-  int? itemsActive;
-  int? itemsPrice;
-  int? itemsDiscount;
+  String? itemsCount;
+  String? itemsActive;
+  String? itemsPrice;
+  String? itemsDiscount;
   String? itemsDate;
-  int? itemsCat;
-  int? categoiresId;
+  String? itemsCat;
+  String? categoiresId;
   String? categoiresName;
   String? categoiresNameAr;
   String? categoiresImage;
   String? categoiresDatetime;
   String? favorite;
+  String? itemsPriceDiscount;
 
   ItemsModel(
       {this.itemsId,
@@ -31,6 +32,7 @@ class ItemsModel {
       this.itemsDiscount,
       this.itemsDate,
       this.itemsCat,
+      this.itemsPriceDiscount,
       this.categoiresId,
       this.categoiresName,
       this.categoiresNameAr,
@@ -51,6 +53,7 @@ class ItemsModel {
     itemsDiscount = json['items_discount'];
     itemsDate = json['items_date'];
     itemsCat = json['items_cat'];
+    itemsPriceDiscount = json['itemspricediscount'];
     categoiresId = json['categoires_id'];
     categoiresName = json['categoires_name'];
     categoiresNameAr = json['categoires_name_ar'];
@@ -78,6 +81,7 @@ class ItemsModel {
     data['categoires_name_ar'] = this.categoiresNameAr;
     data['categoires_image'] = this.categoiresImage;
     data['categoires_datetime'] = this.categoiresDatetime;
+    data['favorite'] = this.favorite;
     return data;
   }
 }

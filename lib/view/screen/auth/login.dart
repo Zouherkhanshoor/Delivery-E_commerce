@@ -29,14 +29,13 @@ class Login extends StatelessWidget {
                   .headlineMedium!
                   .copyWith(color: AppColor.grey)),
         ),
-        body: PopScope(
+        body: PopScope<Object>(
             canPop: false,
-            onPopInvoked: (didPop) {
+            onPopInvokedWithResult: (bool didPop, Object? result) {
               if (didPop) {
                 return;
-              } else {
-                alertExitApp();
               }
+              alertExitApp();
             },
             child: GetBuilder<LoginControllerImp>(
               builder: (controller) => HandlingDataRequest(
@@ -98,14 +97,14 @@ class Login extends StatelessWidget {
                               controller.login();
                             },
                           ),
-                          const SizedBox(height: 30),
-                          CustomTextSignUpOrSignIn(
-                            onTap: () {
-                              controller.goToSignUp();
-                            },
-                            textone: "16".tr,
-                            texttwo: "17".tr,
-                          ),
+                          // const SizedBox(height: 30),
+                          // CustomTextSignUpOrSignIn(
+                          //   onTap: () {
+                          //     controller.goToSignUp();
+                          //   },
+                          //   textone: "16".tr,
+                          //   texttwo: "17".tr,
+                          // ),
                         ],
                       ),
                     ),

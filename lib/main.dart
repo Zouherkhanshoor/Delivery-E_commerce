@@ -8,7 +8,7 @@ import 'package:new_app/routes.dart';
 // import 'package:new_app/test.dart';
 // import 'package:new_app/view/screen/language.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialservices();
   runApp(
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
-      title: "Flutter Demo ",
+      title: "Ecommerce project",
       locale: controller.language,
       theme: controller.appTheme,
       initialBinding: MyBinding(),

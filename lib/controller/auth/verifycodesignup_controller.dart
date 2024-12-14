@@ -7,6 +7,7 @@ import 'package:new_app/data/datasource/remote/auth/verifycodesignup.dart';
 abstract class VerifyCodeSignUpController extends GetxController {
   checkCode();
   goToSuccessSignUp(String verifycodesignup);
+  reSend();
 }
 
 class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
@@ -42,5 +43,10 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   void onInit() {
     email = Get.arguments["email"];
     super.onInit();
+  }
+
+  @override
+  reSend() {
+    verifyCodeSignUpData.reSendData(email!);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/view/screen/home.dart';
+import 'package:new_app/view/screen/orders/accepted.dart';
+import 'package:new_app/view/screen/orders/pending.dart';
 
 abstract class HomeScreenController extends GetxController {
   changePage(int i);
@@ -9,34 +10,16 @@ abstract class HomeScreenController extends GetxController {
 class HomescreenControllerImp extends HomeScreenController {
   int currentpage = 0;
   List<Widget> listpage = [
-    const HomePage(),
-    const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: Text("Settings"),
-        )
-      ],
-    ),
-    const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: Text("Profile"),
-        )
-      ],
-    ),
-    const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: Text("Favorite"),
-        )
-      ],
-    )
+    const OrdersPending(),
+    const OrdersAccepted(),
+    Text(""),
   ];
 
-  List titlebuttonappbar = ["home", "setting", "profile", "favorite"];
+  List buttonappbar = [
+    {"title": "pending", "icon": Icons.home},
+    {"title": "Accepted", "icon": Icons.playlist_add_check_circle_sharp},
+    {"title": "Settings", "icon": Icons.settings},
+  ];
 
   @override
   changePage(int i) {

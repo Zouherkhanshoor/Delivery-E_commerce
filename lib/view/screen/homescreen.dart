@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/controller/homescreen_controller.dart';
-import 'package:new_app/core/constant/color.dart';
+import 'package:new_app/core/functions/alertexitapp.dart';
+// import 'package:new_app/core/constant/color.dart';
 import 'package:new_app/view/widget/home/custombutomappbarhome.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,15 +13,16 @@ class HomeScreen extends StatelessWidget {
     Get.put(HomescreenControllerImp());
     return GetBuilder<HomescreenControllerImp>(
         builder: (controller) => Scaffold(
-            floatingActionButton: FloatingActionButton(
-              shape: const CircleBorder(),
-              backgroundColor: AppColor.primarycolor,
-              onPressed: () {},
-              child: const Icon(Icons.shopping_basket_outlined),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            appBar: AppBar(title: const Text("Orders")),
             bottomNavigationBar: const CustomBotomAppBarHome(),
-            body: controller.listpage.elementAt(controller.currentpage)));
+            body: PopScope<Object>(
+                canPop: false,
+                onPopInvokedWithResult: (bool didPop, Object? result) {
+                  if (didPop) {
+                    return;
+                  }
+                  alertExitApp();
+                },
+                child: controller.listpage.elementAt(controller.currentpage))));
   }
 }

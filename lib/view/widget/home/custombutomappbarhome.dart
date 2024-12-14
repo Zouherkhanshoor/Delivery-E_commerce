@@ -14,17 +14,17 @@ class CustomBotomAppBarHome extends StatelessWidget {
               notchMargin: 10,
               child: Row(
                 children: [
-                  ...List.generate(controller.listpage.length + 1, ((index) {
-                    int i = index > 2 ? index - 1 : index;
-                    return index == 2
-                        ? const Spacer()
-                        : CustomButtomAppBar(
-                            onPressed: () {
-                              controller.changePage(i);
-                            },
-                            textbutton: controller.titlebuttonappbar[i],
-                            icondata: Icons.home,
-                            active: controller.currentpage == i ? true : false);
+                  ...List.generate(controller.listpage.length, ((index) {
+                    return Expanded(
+                      child: CustomButtomAppBar(
+                          onPressed: () {
+                            controller.changePage(index);
+                          },
+                          textbutton: controller.buttonappbar[index]["title"],
+                          icondata: controller.buttonappbar[index]["icon"],
+                          active:
+                              controller.currentpage == index ? true : false),
+                    );
                   })),
                 ],
               ),
